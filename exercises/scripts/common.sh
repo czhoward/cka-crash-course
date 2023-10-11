@@ -1,10 +1,16 @@
 #!/usr/bin/env bash
 
 if [ -z ${K8S_VERSION+x} ]; then
-  K8S_VERSION=1.23.4-00
+  K8S_VERSION=1.28.1-00
 fi
 
-apt-get update && apt-get install apt-transport-https ca-certificates curl software-properties-common
+# Hack DNS if not responding
+host -4 www.google.com | grep -i failed >/dev/null || {
+  NAMESERVER=8.8.8.8
+  grep -q  nameserver /etc/resolv.conf && sed -i_bak "s/\(nameserver\) .*/\1 $NAMESERVER/" /etc/resolv.conf || echo "nameserver $NAMESERVER" >> /etc/resolv.conf
+}
+
+apt-get update && apt-get install -y apt-transport-https ca-certificates curl software-properties-common
 curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -
 echo "deb  http://apt.kubernetes.io/  kubernetes-xenial  main" > /etc/apt/sources.list.d/kubernetes.list
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
