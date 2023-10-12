@@ -6,7 +6,7 @@ fi
 
 # Hack DNS if not responding
 host -4 www.google.com | grep -i failed >/dev/null || {
-  NAMESERVER=8.8.8.8
+  NAMESERVER=192.168.121.1
   grep -q  nameserver /etc/resolv.conf && sed -i_bak "s/\(nameserver\) .*/\1 $NAMESERVER/" /etc/resolv.conf || echo "nameserver $NAMESERVER" >> /etc/resolv.conf
 }
 
