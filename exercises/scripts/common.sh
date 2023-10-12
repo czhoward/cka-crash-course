@@ -48,3 +48,5 @@ systemctl restart docker
 
 # Set alias for kubectl command
 echo "alias k=kubectl" >> /home/vagrant/.bashrc
+swapoff -a
+kubectl completion bash | tee /etc/bash_completion.d/kubectl > .dev.null
