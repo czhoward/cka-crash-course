@@ -50,3 +50,4 @@ systemctl restart docker
 echo "alias k=kubectl" >> /home/vagrant/.bashrc
 swapoff -a
 kubectl completion bash | tee /etc/bash_completion.d/kubectl > .dev.null
+echo 'complete -o default -F __start_kubectl k' >>/home/vagrant/.bashrc
