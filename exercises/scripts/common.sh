@@ -26,7 +26,7 @@ apt-get install -y \
   htop \
   httpie \
   bash-completion \
-  docker-ce=5:19.03.14~3-0~ubuntu-bionic \
+  docker-ce \
   kubeadm=$K8S_VERSION \
   kubelet=$K8S_VERSION \
   kubectl=$K8S_VERSION
