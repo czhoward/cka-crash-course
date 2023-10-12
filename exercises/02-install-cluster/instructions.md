@@ -17,9 +17,9 @@ In this exercise, you will learn how to create a cluster using kubeadm. The clus
 ## Initializing the Control Plane Node
 
 1. Shell into control plane node using the command `vagrant ssh kube-control-plane`.
-2. Initializing the control plane using the `kubeadm init` command. Provide `172.18.0.0/16` as the IP addresses for the Pod network. Use `192.168.56.10` for the IP address the API Server will advertise it's listening on.
+2. Initializing the control plane using the `kubeadm init` command. Provide `172.18.0.0/16` as the IP addresses for the Pod network. Use `192.168.56.10` for the IP address the API Server will advertise it's listening on. If you get a `containerd` error try deleting `/etc/containerd/config.tomal` and then `systemctl restart containerd`
 3. After the `init` command finished, run the necessary commands to run the cluster as non-root user.
-4. Install Calico as with the version 3.22 using the command `kubectl apply -f https://projectcalico.docs.tigera.io/archive/v3.22/manifests/calico.yaml`. For more details on Calico, see the [installation quickstart guide](https://docs.projectcalico.org/getting-started/kubernetes/quickstart).
+4. Install Calico as with the version 3.22 using the command `kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.26.3/manifests/tigera-operator.yaml` and `kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.26.3/manifests/custom-resources.yaml`. For more details on Calico, see the [installation quickstart guide](https://docs.projectcalico.org/getting-started/kubernetes/quickstart).
 5. Verify that the control plabe node indicates the "Ready" status with the command `kubectl get nodes`.
 6. Exit out of the VM using the command `exit`.
 
